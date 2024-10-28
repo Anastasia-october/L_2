@@ -15,7 +15,9 @@ int main(){
     double x2 = a;
     double h;
     for(int j=0; (summ1-summ2)>=E; j++){
-        summ1 = summ2;
+        if (summ2 > 0){
+            summ1 = summ2;
+        }
         h = (b-a) / CountRectangle;
         x1 = x2;
         x2 = x2 + h;
