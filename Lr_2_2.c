@@ -9,9 +9,8 @@ int main(){
     double b; //верхняя граница
     scanf("%lf", &b);
     int CountRectangle = 1;
-    double h; // ширина прямоугольника
     double firstMean = 10000, secondMean = 0; // значения интеграла при разных погрешностях
-    double x1=a, x2=a; // координаты основания прямоугольника
+    double x1=a, x2=a, h; // координаты основания прямоугольника; ширина прямоугольника
     for(int j = 0; fabs(firstMean-secondMean)>=E;j++){
         CountRectangle = CountRectangle * 2; // удваивание числа прямоугольников
         h = (b-a) / CountRectangle; // ширина прямоугольника
@@ -29,9 +28,4 @@ int main(){
     }
     printf("Значение: %lf, с точностью: %lf \n", secondMean, E);
     return 0;
-}//if (j == 0){
-        //    x2 = x1 + h;
-        //    secondMean = secondMean + (h * log((x2 + x1) / 2));
-        //}
-        //else{
-                //}
+}
