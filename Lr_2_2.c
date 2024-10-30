@@ -2,27 +2,36 @@
 #include <math.h>
 
 int main(){
-    double E;
+    double E; //погрешность
     scanf("%lf", &E);
-    double a;
+    double a; //нижняя граница
     scanf("%lf", &a);
-    double b;
+    double b; //верхняя граница
     scanf("%lf", &b);
-    int CountRectangle = 2;
-    double summ1 = 10000;
-    double summ2 = 0;
-    double x1 = a;
-    double x2 = a;
-    double h;
-    for(int j=0; (summ1-summ2)>=E; j++){
-        if (summ2 > 0){
-            summ1 = summ2;
+    int CountRectangle = 1;
+    double h; // ширина прямоугольника
+    double firstMean = 10000, secondMean = 0; // значения интеграла при разных погрешностях
+    double x1=a, x2=a; // координаты основания прямоугольника
+    for(int j = 0; fabs(firstMean-secondMean)>=E;j++){
+        CountRectangle = CountRectangle * 2; // удваивание числа прямоугольников
+        h = (b-a) / CountRectangle; // ширина прямоугольника
+        firstMean = secondMean;
+        for(int i = 0; x2<b;i++){
+            if (i == 0){
+                x1 = a;
+            }
+            else{
+                x1 = x2;
+            }
+            x2 = x1 + h;
+            secondMean = secondMean + h * log((x2 + x1) / 2); //прибавляем площадь следующего прямоугольника
         }
-        h = (b-a) / CountRectangle;
-        x1 = x2;
-        x2 = x2 + h;
-        summ2 = h * log((x2 + x1) * 0.5);
-        CountRectangle = CountRectangle * 2;
     }
-    printf("Значение: %lf, с точностью: %lf \n", summ2, E);
-}
+    printf("Значение: %lf, с точностью: %lf \n", secondMean, E);
+    return 0;
+}//if (j == 0){
+        //    x2 = x1 + h;
+        //    secondMean = secondMean + (h * log((x2 + x1) / 2));
+        //}
+        //else{
+                //}
